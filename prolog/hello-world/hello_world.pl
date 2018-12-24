@@ -6,4 +6,6 @@
 % Replace the goal below with
 % your implementation.
 
-hello_world(false).
+hello_world('Hello World!').
+
+hello_world(Name, Greeting):- atomic_list_concat(['Hello ', Name, '!'], Greeting).
