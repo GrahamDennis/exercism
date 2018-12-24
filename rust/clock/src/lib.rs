@@ -7,7 +7,7 @@ pub struct Clock {
 fn div_euc(dividend: i32, divisor: i32) -> i32 {
     let q = dividend / divisor;
     if dividend % divisor < 0 {
-        return q - 1
+        return q - 1;
     }
     q
 }
@@ -22,15 +22,15 @@ fn mod_euc(dividend: i32, divisor: i32) -> i32 {
 
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
-        Clock { 
-            hours: mod_euc(hours + div_euc(minutes, 60), 24), 
-            minutes: mod_euc(minutes, 60) }
+        Clock {
+            hours: mod_euc(hours + div_euc(minutes, 60), 24),
+            minutes: mod_euc(minutes, 60),
+        }
     }
 
     pub fn add_minutes(self, minutes: i32) -> Self {
         Clock::new(self.hours, self.minutes + minutes)
     }
-
 }
 
 impl std::fmt::Display for Clock {
