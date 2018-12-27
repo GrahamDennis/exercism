@@ -1,32 +1,29 @@
+import java.util.stream.IntStream;
+
 class Hamming {
 
-    private final String leftStrand;
-    private final String rightStrand;
+    private final char[] left;
+    private final char[] right;
 
-    Hamming(String leftStrand, String rightStrand) {
-        checkEqualLengths(leftStrand, rightStrand);
-        this.leftStrand = leftStrand;
-        this.rightStrand = rightStrand;
+    Hamming(String left, String right) {
+        checkEqualLengths(left, right);
+        this.left = left.toCharArray();
+        this.right = right.toCharArray();
     }
 
-    private static void checkEqualLengths(String leftStrand, String rightStrand) {
-        if (leftStrand.length() != rightStrand.length()) {
+    private static void checkEqualLengths(String left, String right) {
+        if (left.length() != right.length()) {
             throw new IllegalArgumentException("leftStrand and rightStrand must be of equal length.");
         }
     }
 
     int getHammingDistance() {
-        char[] leftCharArray = leftStrand.toCharArray();
-        char[] rightCharArray = rightStrand.toCharArray();
-
-        int distance = 0;
-        for (int idx = 0; idx < leftCharArray.length; idx++) {
-            if (leftCharArray[idx] != rightCharArray[idx]) {
-                distance++;
-            }
-        }
-
-        return distance;
+        return (int) IntStream.range(0, left.length)
+                .filter(this::isDifferentAt)
+                .count();
     }
 
+    private boolean isDifferentAt(int idx) {
+        return left[idx] != right[idx];
+    }
 }
