@@ -9,18 +9,22 @@ pub fn is_valid(code: &str) -> bool {
         .flat_map(|c| c.to_digit(10))
         .rev()
         .enumerate()
-        .map(|(i, v)| if i % 2 == 1 { digit_double(v) } else { v })
+        .map(|(i, v)| digit_checksum(i, v))
         .sum();
 
     checksum % 10 == 0
 }
 
-fn digit_double(d: u32) -> u32 {
-    let result = 2 * d;
-    if result > 9 {
-        result - 9
+fn digit_checksum(reverse_idx: usize, digit: u32) -> u32 {
+    if reverse_idx % 2 == 0 {
+        return digit;
+    }
+
+    let doubled = 2 * digit;
+    if doubled > 9 {
+        doubled - 9
     } else {
-        result
+        doubled
     }
 }
 
