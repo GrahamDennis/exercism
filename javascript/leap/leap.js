@@ -1,3 +1,4 @@
-const isDivisibleBy = (divisor) => (dividend) => (dividend % divisor) === 0;
-
-export const isLeap = (year) => isDivisibleBy(400)(year) || isDivisibleBy(4)(year) && !isDivisibleBy(100)(year);
+export const isLeap = (year) => {
+    const isDivisibleBy = (divisor) => year % divisor === 0;
+    return isDivisibleBy(400) || isDivisibleBy(4) && !isDivisibleBy(100);
+};
