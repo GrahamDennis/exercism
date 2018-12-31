@@ -3,20 +3,13 @@ pub fn brackets_are_balanced(string: &str) -> bool {
 
     for c in string.chars() {
         match c {
-            '(' | '{' | '[' => stack.push(c),
-            ')' | '}' | ']' => if stack.pop() != Some(opener(c)) { return false } else { () },
+            '(' => stack.push(')'),
+            '{' => stack.push('}'),
+            '[' => stack.push(']'),
+            ')' | '}' | ']' => if stack.pop() != Some(c) { return false },
             _ => ()
         }
     }
 
     stack.is_empty()
-}
-
-fn opener(bracket: char) -> char {
-    match bracket {
-        ')' => '(',
-        ']' => '[',
-        '}' => '{',
-        _ => panic!("unknown bracket {}", bracket),
-    }
 }
